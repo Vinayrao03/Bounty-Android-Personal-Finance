@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">PersonalFinance</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_view_account">ViewAccount</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_view_all_transaction">View All Transactions</string>
+    <string name="title_activity_add_new_transaction">AddNewTransactionActivity</string>
+
+    <string-array name="spinnerItems">
+        <item>Cash</item>
+        <item>Credit Card</item>
+        <item>Debit Card</item>
+    </string-array>
+
+    <string-array name="categoryItems">
+        <item>Shopping</item>
+        <item>Groceries</item>
+        <item>Transport</item>
+        <item>Study</item>
+        <item>Party</item>
+        <item>Gifts</item>
+        <item> HouseRent</item>
+        <item>Electicity Bill</item>
+        <item>Water Bill</item>
+        <item>Internet Bill</item>
+        <item>Phone Bills/Recharges</item>
+    </string-array>
+    <string name="title_activity_camera">CameraActivity</string>
+</resources>

@@ -1,0 +1,100 @@
+package com.example.vinay.personalfinance;
+
+/**
+ * Created by Vinay on 25-01-2016.
+ */
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
+import com.example.vinay.personalfinance.adpater.TransactionAdapter;
+import com.example.vinay.personalfinance.database.DatabaseHelper;
+
+public class ViewAllTransaction extends ActionBarActivity {
+
+
+    TransactionAdapter ta;
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
+    DatabaseHelper dbHelper;
+
+    //the buttons for views
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_view_all_transaction);
+
+        //get the recycler view
+        recyclerView = (RecyclerView) findViewById(R.id.transListRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        dbHelper = new DatabaseHelper(this);
+
+        String cat = getIntent().getStringExtra("CAT_NAME") ;
+        if(cat == null)
+            cat="";
+        //setting the adapter
+        ta = new TransactionAdapter(this,dbHelper,cat);
+        recyclerView.setAdapter(ta);
+
+
+        Button newTransBtn = (Button) findViewById(R.id.addNewTransactionBtn);
+        newTransBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO code here to add a new transaction
+                startNewTransaction();
+
+            }
+        });
+
+    }
+
+    private void startNewTransaction() {
+
+        Intent i = new Intent(this, AddNewTransactionActivity.class);
+        startActivityForResult(i,0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        ta.updateList();
+    }
+
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_view_all_transaction, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+}
+
+
